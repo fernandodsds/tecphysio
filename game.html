@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/game.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="father">
+        <div class="item-hud"> 
+            <div class="cam">
+                
+                <video class="input_video5"></video>
+            </div> 
+            <div class="score"> 
+                <h3>TEMPO:</h3> 
+                <div class="score-panel"> 10 </div>
+            </div>
+
+            <div class="status-information"> 
+                <img  src="./assets/images/pause.png" alt="">
+                <p>PRESSIONE ESPAÇO PARA CONTINUAR</p>
+            </div>
+        </div>
+        <div class="item-panel"><canvas class="output5"  width="480px" height="480px"></canvas></div>
+    </div>
+    <div style="visibility: hidden;" class="control5">
+    </div>
+    <script type="text/javascript" src="./js/pose.js"></script>
+</body>
+</html>
