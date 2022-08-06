@@ -2,16 +2,86 @@ const video5 = document.getElementsByClassName('input_video5')[0];
 const out5 = document.getElementsByClassName('output5')[0];
 const controlsElement5 = document.getElementsByClassName('control5')[0];
 const canvasCtx5 = out5.getContext('2d');
-
 const fpsControl = new FPS();
+const CARD_WIDTH = 120
+const CARD_HEIGHT = 250
+const DEFAULT_IMAGE = "default.png"
 
+var selectedCards = []
+
+var base_image = new Image();
+base_image.src = "/assets/game_images/" +DEFAULT_IMAGE; 
+
+var dog_image1 = new Image();
+dog_image1.src = "/assets/game_images/dog1.png"; 
+
+var dog_image2 = new Image();
+dog_image2.src = "/assets/game_images/dog2.png"; 
+
+var dog_image3 = new Image();
+dog_image3.src = "/assets/game_images/dog3.png"; 
+
+images = [dog_image1,dog_image2,dog_image3]
+
+
+var curPerc = 0
+var defaultCard = {"x": 10, "y":10, "image":base_image, "pressed":false, "revealed":false }
+var cards = []
+var sizeWidth = canvasCtx5.canvas.clientWidth;
+var sizeHeight = canvasCtx5.canvas.clientHeight;
+var startTime=new Date();
+var cursorPos = {x:0, y:0};
+var gameInitialized = false;
+var revealTime = 0;
+
+function shuffleArray(array) {
+ 
+  return array.sort( ()=>Math.random()-0.5 );
+
+}
+
+images = shuffleArray(images)
+console.log(images)
+for (var i = 0; i<3;i++){
+  cards.push({"x": 10 + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+}
+images = shuffleArray(images)
+console.log(images)
+for (var i = 0; i<3;i++){
+  cards.push({"x": 10 + (CARD_WIDTH*(i)), "y":265, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+}
+console.log(cards)
 
 function zColor(data) {
   const z = clamp(data.from.z + 0.5, 0, 1);
   return `rgba(0, ${255 * z}, ${255 * (1 - z)}, 1)`;
 }
 
+function onCardCursor(cardPos, cursorPos){
+  //console.log(cardPos)
+  //console.log(cursorPos)
+  if (cursorPos.x >= cardPos.x && cursorPos.x <= (cardPos.x + CARD_WIDTH) && cursorPos.y >= cardPos.y && cursorPos.y <= (cardPos.y + CARD_HEIGHT)) {
+    return true
+  } else if(cursorPos.x >= (cardPos.x + CARD_WIDTH) && cursorPos.x <= cardPos.x && cursorPos.y  >= (cardPos.y + CARD_HEIGHT) && cursorPos.y  <= cardPos.y){
+    return true
+  }
+  
+  return false
+
+}
+
+function verifyIsEqualsCard(selectedCards){
+  return cards[selectedCards[0]].revealed_image_id == cards[selectedCards[1]].revealed_image_id
+}
+
+function drawImageCard(image,context, x,y)
+{
+  context.drawImage(image, x, y, CARD_WIDTH, CARD_HEIGHT);
+}
+
 function onResultsPose(results) {
+  TotalElapsedTime=parseInt((new Date() - startTime)/1000);
+
   document.body.classList.add('loaded');
   fpsControl.tick();
 
@@ -19,15 +89,84 @@ function onResultsPose(results) {
   canvasCtx5.globalAlpha = 0.25;
   canvasCtx5.clearRect(0, 0, out5.width, out5.height);
   canvasCtx5.drawImage(
-    results.image, 0, 0, out5.width, out5.height);
-  canvasCtx5.restore()  
-  console.log(results.poseLandmarks[19])
+    results.image, 0, 0, out5.width, out5.height); 
+  
+  canvasCtx5.restore();    
+  canvasCtx5.stroke();
+
+  for (var i = 0; i <6 ;i++){
+    drawImageCard( cards[i].image,canvasCtx5,cards[i].x,cards[i].y);  
+  }  
+  //console.log(cards)
   drawLandmarks(
       canvasCtx5,
       Object.values([[19]])
           .map(index => results.poseLandmarks[index]),
       {color: zColor, fillColor: '#FF0000'});
+  canvasCtx5.font = "30px Arial";
+  cursorPos.x = results.poseLandmarks[19].x*out5.width;
+  cursorPos.y = results.poseLandmarks[19].y*out5.height;
+  if (TotalElapsedTime <=5){
+    console.log(TotalElapsedTime)
+    return
+  }
+
+  if (gameInitialized == false){
+    cards.forEach(element => {
+      element.image = base_image
+    });
+    gameInitialized = true;
+  }
+
+
+  for (var i = 0; i<6;i++){
+    if (onCardCursor(cards[i], cursorPos) 
+        && cards[i].elapsed <= 3 
+        && !cards[i].revealed 
+        && selectedCards.length < 2){
+      cards[i].elapsed=parseInt((new Date() - cards[i].startTime)/1000);
+      if (cards[i].pressed != true){
+        cards[i].pressed = true
+      }
+
+      if (cards[i].elapsed > 3 ){
+        cards[i].revealed = true
+        cards[i].image = cards[i].revealed_image_id;
+        selectedCards.push(i);  
+        console.log(selectedCards)  
+        if (selectedCards.length == 2){
+          revealTime = TotalElapsedTime
+        }  
+      }
+
+
+      canvasCtx5.fillText(cards[i].elapsed, cursorPos.x, cursorPos.y)    
+      //console.log(cards[i].elapsed)
+
+    } else {
+      cards[i].pressed =  false
+      cards[i].startTime=new Date();
+    }
+
+    if (selectedCards.length == 2 && (TotalElapsedTime - revealTime) > 2 ){ 
+      console.log(verifyIsEqualsCard(selectedCards))
+      if (!verifyIsEqualsCard(selectedCards) ) 
+      {
+        cards[selectedCards[0]].image = base_image;
+        cards[selectedCards[1]].image = base_image;
+        cards[selectedCards[0]].revealed = false;
+        cards[selectedCards[1]].revealed = false;
+        cards[selectedCards[0]].elapsed = 0;
+        cards[selectedCards[1]].elapsed = 0;
+      }
+      
+      selectedCards = []
+    }
+ 
     
+
+  }
+
 }
 
 const pose = new Pose({locateFile: (file) => {
