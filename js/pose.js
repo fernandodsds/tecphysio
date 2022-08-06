@@ -10,16 +10,16 @@ const DEFAULT_IMAGE = "default.png"
 var selectedCards = []
 
 var base_image = new Image();
-base_image.src = "/assets/game_images/" +DEFAULT_IMAGE; 
+base_image.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/" +DEFAULT_IMAGE; 
 
 var dog_image1 = new Image();
-dog_image1.src = "/assets/game_images/dog1.png"; 
+dog_image1.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/dog1.png"; 
 
 var dog_image2 = new Image();
-dog_image2.src = "/assets/game_images/dog2.png"; 
+dog_image2.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/dog2.png"; 
 
 var dog_image3 = new Image();
-dog_image3.src = "/assets/game_images/dog3.png"; 
+dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/dog3.png"; 
 
 images = [dog_image1,dog_image2,dog_image3]
 
