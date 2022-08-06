@@ -22,8 +22,8 @@ var dog_image3 = new Image();
 dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/dog3.png"; 
 
 images = [dog_image1,dog_image2,dog_image3]
-
-
+images = images.concat(images)
+console.log(images)
 var curPerc = 0
 var defaultCard = {"x": 10, "y":10, "image":base_image, "pressed":false, "revealed":false }
 var cards = []
@@ -45,10 +45,9 @@ console.log(images)
 for (var i = 0; i<3;i++){
   cards.push({"x": 10 + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
 }
-images = shuffleArray(images)
-console.log(images)
-for (var i = 0; i<3;i++){
-  cards.push({"x": 10 + (CARD_WIDTH*(i)), "y":265, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+
+for (var i = 3; i<6;i++){
+  cards.push({"x": 10 + (CARD_WIDTH*(i-3)), "y":265, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
 }
 console.log(cards)
 
