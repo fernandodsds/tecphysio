@@ -3,8 +3,8 @@ const out5 = document.getElementsByClassName('output5')[0];
 const controlsElement5 = document.getElementsByClassName('control5')[0];
 const canvasCtx5 = out5.getContext('2d');
 const fpsControl = new FPS();
-const CARD_WIDTH = 120
-const CARD_HEIGHT = 250
+const CARD_WIDTH = 150
+const CARD_HEIGHT = 150
 const DEFAULT_IMAGE = "default.png"
 
 var selectedCards = []
@@ -43,12 +43,14 @@ function shuffleArray(array) {
 images = shuffleArray(images)
 console.log(images)
 for (var i = 0; i<3;i++){
-  cards.push({"x": 10 + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+  console.log(15 + (CARD_WIDTH*(i)))
+  cards.push({"x": 15*(i) + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
 }
 
 for (var i = 3; i<6;i++){
-  cards.push({"x": 10 + (CARD_WIDTH*(i-3)), "y":265, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+  cards.push({"x": 15*(i-3) + (CARD_WIDTH*(i-3)), "y":CARD_HEIGHT+40, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
 }
+
 console.log(cards)
 
 function zColor(data) {
@@ -136,9 +138,8 @@ function onResultsPose(results) {
         if (selectedCards.length == 2){
           revealTime = TotalElapsedTime
         }  
+
       }
-
-
       canvasCtx5.fillText(cards[i].elapsed, cursorPos.x, cursorPos.y)    
       //console.log(cards[i].elapsed)
 
