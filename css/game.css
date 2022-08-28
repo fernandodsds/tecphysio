@@ -1,104 +1,102 @@
-  
-  @font-face {
-    font-family: 'Geo';
-    src: url(../assets/font/Geo-Regular.ttf)
-  }
-  @font-face {
-    font-family: 'Roboto';
-    src: url(../assets/font/Roboto-Regular.ttf)
-  }
-
-
-  html,body{
-    background-color: #cedde2;
-
-  }
-
-  *, html {
-    margin:0 !important;;
-    padding:0 !important; 
+@font-face {
+  font-family: 'Geo';
+  src: url(../assets/font/Geo-Regular.ttf)
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url(../assets/font/Roboto-Regular.ttf)
 }
 
 
-  .father {
-    height: 100vh;
-    display: flex;
-  }   
+html,body{
+  background-color: #cedde2;
 
-  .item-hud {
-    margin: 5px;
-    background: #FFE500;
-    text-align: center;
-    font-size: 1.5em;
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-  }
-  .cam{
-    height: 20%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+}
 
-  .score{
-    height: 35%;
-    width: 100%;
-    font-family: 'Geo';
-    font-size: 1.5em;
-    font:bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  } 
-  
-  .score-panel{
-    height: 15%;
-    width: 70%;
-    border-radius: 1em;
-    text-align: center;
-    font-family: 'Geo';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F2994A;
-  }  
+*, html {
+  margin:0 !important;;
+  padding:0 !important; 
+}
 
-  .status-information{
-    height: 30%;
-    width: 100%;
-    font-family: 'Roboto';
-    font-size: 0.7em;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-  } 
-  
-  .status-information img{
-      width: 35%;
-      margin: 0.5em !important;
-  }
 
-  .input_video5{
-    width: 95%;
-    height: 95%;
-  } 
+.father {
+  height: 100vh;
+  display: flex;
+}   
 
-  .output5{
-    width: 100%;
-    height: 100%;
-  } 
-  .item-panel {
-    margin: 5px;
-    width: 85%;
-    background-color: #ffff;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    text-align: center;
-    font-size: 1.5em;
-  }
+.item-hud {
+  margin: 5px;
+  background: #FFE500;
+  text-align: center;
+  font-size: 1.5em;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+}
+.cam{
+  height: 24%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score{
+  height: 35%;
+  width: 100%;
+  font-family: 'Geo';
+  font-size: 1.5em;
+  font:bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} 
+
+.score-panel{
+  height: 15%;
+  width: 70%;
+  border-radius: 1em;
+  text-align: center;
+  font-family: 'Geo';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2994A;
+}  
+
+.status-information{
+  height: 30%;
+  width: 100%;
+  font-family: 'Roboto';
+  font-size: 0.7em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+} 
+
+.status-information img{
+    width: 35%;
+    margin: 0.5em !important;
+}
+
+.input_video{
+  height: 100%;
+} 
+
+.output5{
+  width: 100%;
+  height: 100%;
+} 
+.item-panel {
+  margin: 5px;
+  width: 100%;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  text-align: center;
+  font-size: 1.5em;
+}
