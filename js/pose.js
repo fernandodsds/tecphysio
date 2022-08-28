@@ -33,6 +33,8 @@ var startTime=new Date();
 var cursorPos = {x:0, y:0};
 var gameInitialized = false;
 var revealTime = 0;
+var gameScore = 0 
+var qtdeJogos = 0
 
 function shuffleArray(array) {
  
@@ -40,18 +42,24 @@ function shuffleArray(array) {
 
 }
 
-images = shuffleArray(images)
-console.log(images)
-for (var i = 0; i<3;i++){
-  console.log(15 + (CARD_WIDTH*(i)))
-  cards.push({"x": 15*(i) + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+function initGame()
+{
+  cards = []
+  images = shuffleArray(images)
+  console.log(images)
+  
+  for (var i = 0; i<3;i++){
+    console.log(15 + (CARD_WIDTH*(i)))
+    cards.push({"x": 15*(i) + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+  }
+  
+  for (var i = 3; i<6;i++){
+    cards.push({"x": 15*(i-3) + (CARD_WIDTH*(i-3)), "y":CARD_HEIGHT+40, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+  }
+  return cards
 }
 
-for (var i = 3; i<6;i++){
-  cards.push({"x": 15*(i-3) + (CARD_WIDTH*(i-3)), "y":CARD_HEIGHT+40, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
-}
 
-console.log(cards)
 
 function zColor(data) {
   const z = clamp(data.from.z + 0.5, 0, 1);
@@ -79,6 +87,12 @@ function drawImageCard(image,context, x,y)
 {
   context.drawImage(image, x, y, CARD_WIDTH, CARD_HEIGHT);
 }
+
+function validateEndedGame(toValidationCards){
+  return toValidationCards.every( (val, i, arr) => val.revealed === arr[0].revealed )
+}
+
+cards = initGame()
 
 function onResultsPose(results) {
   TotalElapsedTime=parseInt((new Date() - startTime)/1000);
@@ -108,11 +122,13 @@ function onResultsPose(results) {
   cursorPos.x = results.poseLandmarks[19].x*out5.width;
   cursorPos.y = results.poseLandmarks[19].y*out5.height;
   if (TotalElapsedTime <=5){
+    //verifyIsEqualsCard(selectedCards)
     console.log(TotalElapsedTime)
     return
   }
 
   if (gameInitialized == false){
+    //cards = initGame()
     cards.forEach(element => {
       element.image = base_image
     });
@@ -149,7 +165,6 @@ function onResultsPose(results) {
     }
 
     if (selectedCards.length == 2 && (TotalElapsedTime - revealTime) > 2 ){ 
-      console.log(verifyIsEqualsCard(selectedCards))
       if (!verifyIsEqualsCard(selectedCards) ) 
       {
         cards[selectedCards[0]].image = base_image;
@@ -159,7 +174,15 @@ function onResultsPose(results) {
         cards[selectedCards[0]].elapsed = 0;
         cards[selectedCards[1]].elapsed = 0;
       }
-      
+      else 
+      {
+        gameScore += 1
+        document.getElementById("score").innerHTML = ""+gameScore;
+      }
+      if(validateEndedGame(cards) ){
+        qtdeJogos += 1
+        document.getElementById("qtdeJogos").innerHTML = ""+qtdeJogos;
+      }
       selectedCards = []
     }
  
