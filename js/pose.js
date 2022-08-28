@@ -9,6 +9,10 @@ const DEFAULT_IMAGE = "default.png"
 
 var selectedCards = []
 
+var cursor = new Image();
+cursor.src = "https://fernandodsds.github.io/tecphysio/assets/images/cursor.png"; 
+
+
 var base_image = new Image();
 base_image.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/" +DEFAULT_IMAGE; 
 
@@ -122,6 +126,9 @@ function onResultsPose(results) {
   canvasCtx5.font = "30px Arial";
   cursorPos.x = results.poseLandmarks[19].x*out5.width;
   cursorPos.y = results.poseLandmarks[19].y*out5.height;
+
+  canvasCtx5.drawImage(cursor, cursorPos.x, cursorPos.y, 50, 50);
+
   if (TotalElapsedTime <=5){
     //verifyIsEqualsCard(selectedCards)
     console.log(TotalElapsedTime)
