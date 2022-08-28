@@ -127,7 +127,7 @@ function onResultsPose(results) {
   cursorPos.x = results.poseLandmarks[19].x*out5.width;
   cursorPos.y = results.poseLandmarks[19].y*out5.height;
 
-  canvasCtx5.drawImage(cursor, cursorPos.x, cursorPos.y, 50, 50);
+  canvasCtx5.drawImage(cursor, cursorPos.x-25, cursorPos.y-25, 50, 50);
 
   if (TotalElapsedTime <=5){
     //verifyIsEqualsCard(selectedCards)
@@ -164,7 +164,7 @@ function onResultsPose(results) {
         }  
 
       }
-      canvasCtx5.fillText(cards[i].elapsed, cursorPos.x, cursorPos.y)    
+      canvasCtx5.fillText(cards[i].elapsed, cursorPos.x-25, cursorPos.y-25)    
       //console.log(cards[i].elapsed)
 
     } else {
