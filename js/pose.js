@@ -1,4 +1,4 @@
-const video5 = document.getElementsByClassName('input_video5')[0];
+const video5 = document.getElementsByClassName('input_video')[0];
 const out5 = document.getElementsByClassName('output5')[0];
 const controlsElement5 = document.getElementsByClassName('control5')[0];
 const canvasCtx5 = out5.getContext('2d');
@@ -89,7 +89,8 @@ function drawImageCard(image,context, x,y)
 }
 
 function validateEndedGame(toValidationCards){
-  return toValidationCards.every( (val, i, arr) => val.revealed === arr[0].revealed )
+  return toValidationCards.every( (val, i, arr) => val.revealed === true )
+
 }
 
 cards = initGame()
