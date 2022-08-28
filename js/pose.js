@@ -90,6 +90,7 @@ function drawImageCard(image,context, x,y)
 
 function validateEndedGame(toValidationCards){
   return toValidationCards.every( (val, i, arr) => val.revealed === true )
+
 }
 
 cards = initGame()
