@@ -14,19 +14,24 @@
 <body>
     <div class="father">
         <div class="item-hud"> 
+
             <div class="cam">
-                
-                <video class="input_video5"></video>
+                <video class="input_video"></video>
             </div> 
-            <div class="score"> 
-                <h3>TEMPO:</h3> 
-                <div class="score-panel"> 10 </div>
+
+            <div class="score" > 
+                <h3>PONTUAÇÃO:</h3> 
+                <div class="score-panel" id="score"> 0 </div>
+                <br>
+                <h3>PARTIDAS:</h3> 
+                <div class="score-panel" id="qtdeJogos"> 0 </div>
             </div>
 
             <div class="status-information"> 
                 <img  src="./assets/images/pause.png" alt="">
                 <p>PRESSIONE ESPAÇO PARA CONTINUAR</p>
             </div>
+
         </div>
         <div class="item-panel">
             <canvas class="output5"  width="480px" height="480px"></canvas>

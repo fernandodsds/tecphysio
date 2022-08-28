@@ -35,7 +35,7 @@
     flex-direction: column;
   }
   .cam{
-    height: 20%;
+    height: 25%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -83,9 +83,8 @@
       margin: 0.5em !important;
   }
 
-  .input_video5{
-    width: 95%;
-    height: 95%;
+  .input_video{
+    height: 100%;
   } 
 
   .output5{
@@ -94,7 +93,7 @@
   } 
   .item-panel {
     margin: 5px;
-    width: 85%;
+    width: 100%;
     background-color: #ffff;
     display: flex;
     justify-content: center;
