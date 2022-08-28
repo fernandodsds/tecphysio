@@ -3,8 +3,8 @@ const out5 = document.getElementsByClassName('output5')[0];
 const controlsElement5 = document.getElementsByClassName('control5')[0];
 const canvasCtx5 = out5.getContext('2d');
 const fpsControl = new FPS();
-const CARD_WIDTH = 150
-const CARD_HEIGHT = 150
+const CARD_WIDTH = 140
+const CARD_HEIGHT = 140
 const DEFAULT_IMAGE = "default.png"
 
 var selectedCards = []
@@ -50,11 +50,11 @@ function initGame()
   
   for (var i = 0; i<3;i++){
     console.log(15 + (CARD_WIDTH*(i)))
-    cards.push({"x": 15*(i) + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+    cards.push({"x": 15*(i+1) + (CARD_WIDTH*(i)), "y":10, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
   }
   
   for (var i = 3; i<6;i++){
-    cards.push({"x": 15*(i-3) + (CARD_WIDTH*(i-3)), "y":CARD_HEIGHT+40, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+    cards.push({"x": 15 *(i - 2) + (CARD_WIDTH*(i-3)), "y":CARD_HEIGHT+40, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
   }
   return cards
 }

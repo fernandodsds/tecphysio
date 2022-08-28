@@ -7,6 +7,12 @@
   src: url(../assets/font/Roboto-Regular.ttf)
 }
 
+@font-face {
+  font-family: 'Outfit';
+  src: url(../assets/font/Outfit-Thin.ttf)
+}
+
+
 
 html,body{
   background-color: #cedde2;
@@ -26,7 +32,7 @@ html,body{
 
 .item-hud {
   margin: 5px;
-  background: #FFE500;
+  background: #6D0094;
   text-align: center;
   font-size: 1.5em;
   width: 15%;
@@ -44,9 +50,11 @@ html,body{
 .score{
   height: 35%;
   width: 100%;
-  font-family: 'Geo';
-  font-size: 1.5em;
-  font:bold;
+  font-family: 'Outfit';
+  font-weight: bold;
+  font-size: 1em;
+  color: white;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,17 +66,18 @@ html,body{
   width: 70%;
   border-radius: 1em;
   text-align: center;
-  font-family: 'Geo';
+  font-family: 'Outfit';
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F2994A;
+  background-color: #56CCF2;
 }  
 
 .status-information{
   height: 30%;
   width: 100%;
   font-family: 'Roboto';
+  color: white;
   font-size: 0.7em;
   text-align: center;
   display: flex;
