@@ -31,9 +31,9 @@ console.log(images)
 var curPerc = 0
 var defaultCard = {"x": 10, "y":10, "image":base_image, "pressed":false, "revealed":false }
 var cards = []
-var sizeWidth = canvasCtx5.canvas.clientWidth;
+var sizeWidth  = canvasCtx5.canvas.clientWidth;
 var sizeHeight = canvasCtx5.canvas.clientHeight;
-var startTime=new Date();
+var startTime  = new Date();
 var cursorPos = {x:0, y:0};
 var gameInitialized = false;
 var revealTime = 0;
@@ -48,9 +48,11 @@ function shuffleArray(array) {
 
 function initGame()
 {
-  cards = []
-  images = shuffleArray(images)
-  console.log(images)
+  cards = [];
+  gameInitialized = false;
+  images = shuffleArray(images);
+  console.log(images);
+  startTime = new Date();
   
   for (var i = 0; i<3;i++){
     console.log(15 + (CARD_WIDTH*(i)))
@@ -193,11 +195,7 @@ function onResultsPose(results) {
       }
       selectedCards = []
     }
- 
-    
-
   }
-
 }
 
 const pose = new Pose({locateFile: (file) => {
