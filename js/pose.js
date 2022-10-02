@@ -120,14 +120,20 @@ function onResultsPose(results) {
     drawImageCard( cards[i].image,canvasCtx5,cards[i].x,cards[i].y);  
   }  
   //console.log(cards)
+ var lmuse = 19;
+  if (results.poseLandmarks[20].x*out5.width <= out5.width && results.poseLandmarks[20].y*out5.height <= out5.height)
+  {
+     lmuse = 20;
+  };
+
   drawLandmarks(
       canvasCtx5,
-      Object.values([[19]])
+      Object.values([[lmuse]])
           .map(index => results.poseLandmarks[index]),
       {color: zColor, fillColor: '#FF0000'});
   canvasCtx5.font = "30px Arial";
-  cursorPos.x = results.poseLandmarks[19].x*out5.width;
-  cursorPos.y = results.poseLandmarks[19].y*out5.height;
+  cursorPos.x = results.poseLandmarks[lmuse].x*out5.width;
+  cursorPos.y = results.poseLandmarks[lmuse].y*out5.height;
 
   canvasCtx5.drawImage(cursor, cursorPos.x-25, cursorPos.y-25, 50, 50);
 
