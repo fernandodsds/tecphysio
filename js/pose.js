@@ -222,8 +222,8 @@ new ControlPanel(controlsElement5, {
       selfieMode: true,
       upperBodyOnly: false,
       smoothLandmarks: true,
-      minDetectionConfidence: 0.90,
-      minTrackingConfidence: 0.90
+      minDetectionConfidence: 0.60,
+      minTrackingConfidence: 0.60
     })
     .add([
       new StaticText({title: 'MediaPipe Pose'}),
