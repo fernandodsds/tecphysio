@@ -131,11 +131,11 @@ function onResultsPose(results) {
       Object.values([[lmuse]])
           .map(index => results.poseLandmarks[index]),
       {color: zColor, fillColor: '#FF0000'});
-  canvasCtx5.font = "30px Arial";
+  canvasCtx5.font = "40px Arial";
   cursorPos.x = results.poseLandmarks[lmuse].x*out5.width;
   cursorPos.y = results.poseLandmarks[lmuse].y*out5.height;
 
-  canvasCtx5.drawImage(cursor, cursorPos.x-100, cursorPos.y-100, 100, 100);
+  canvasCtx5.drawImage(cursor, cursorPos.x-50, cursorPos.y-50, 100, 100);
 
   if (TotalElapsedTime <=5){
     //verifyIsEqualsCard(selectedCards)
@@ -172,7 +172,7 @@ function onResultsPose(results) {
         }  
 
       }
-      canvasCtx5.fillText(cards[i].elapsed, cursorPos.x-25, cursorPos.y-25)    
+      canvasCtx5.fillText(cards[i].elapsed, cursorPos.x-50, cursorPos.y-50)    
       //console.log(cards[i].elapsed)
 
     } else {
