@@ -3,7 +3,7 @@ const out5 = document.getElementsByClassName('output5')[0];
 const controlsElement5 = document.getElementsByClassName('control5')[0];
 const canvasCtx5 = out5.getContext('2d');
 const fpsControl = new FPS();
-const CARD_WIDTH = 360
+const CARD_WIDTH = 288
 const CARD_HEIGHT = 360
 const DEFAULT_IMAGE = "default.png"
 
