@@ -7,26 +7,34 @@ const CARD_WIDTH = 288
 const CARD_HEIGHT = 360
 const DEFAULT_IMAGE = "default.png"
 
+function shuffleArray(array) {
+ 
+  return array.sort( ()=>Math.random()-0.5 );
+
+}
+
 var selectedCards = []
+
+var themes = ['africa','gatos_e_cachorros','default']
 
 var cursor = new Image();
 cursor.src = "https://fernandodsds.github.io/tecphysio/assets/images/cursor.png"; 
+var theme = shuffleArray(themes)[0]
 
 
 var base_image = new Image();
 base_image.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/" +DEFAULT_IMAGE; 
 
 var dog_image1 = new Image();
-dog_image1.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/img1.png"; 
+dog_image1.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img1.png"; 
 
 var dog_image2 = new Image();
-dog_image2.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/img2.png"; 
+dog_image2.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img2.png"; 
 
 var dog_image3 = new Image();
-dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/img3.png"; 
+dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img3.png"; 
 
-images = [dog_image1,dog_image2,dog_image3]
-images = images.concat(images)
+
 console.log(images)
 var curPerc = 0
 var defaultCard = {"x": 10, "y":10, "image":base_image, "pressed":false, "revealed":false }
@@ -40,11 +48,8 @@ var revealTime = 0;
 var gameScore = 0 
 var qtdeJogos = 0
 
-function shuffleArray(array) {
- 
-  return array.sort( ()=>Math.random()-0.5 );
-
-}
+images = [dog_image1,dog_image2,dog_image3]
+images = images.concat(images)
 
 function initGame()
 {
