@@ -8,14 +8,25 @@ const CARD_HEIGHT = 360
 const DEFAULT_IMAGE = "default.png"
 
 function shuffleArray(array) {
- 
   return array.sort( ()=>Math.random()-0.5 );
-
 }
 
 var selectedCards = []
-
-var themes = ['africa','gatos_e_cachorros','default']
+var images = []
+var themes = [
+  'africa'
+  ,'anifrio'
+  ,'aves'
+  ,'brasil'
+  ,'carros'
+  ,'catdog'
+  ,'default'
+  ,'frutas'
+  ,'jardim'
+  ,'mar'
+  ,'monumento'
+  ,'praia'
+]
 
 var cursor = new Image();
 cursor.src = "https://fernandodsds.github.io/tecphysio/assets/images/cursor.png"; 
@@ -47,12 +58,29 @@ var gameInitialized = false;
 var revealTime = 0;
 var gameScore = 0 
 var qtdeJogos = 0
+var lmuse = 19;
 
 images = [dog_image1,dog_image2,dog_image3]
 images = images.concat(images)
 
+
+
 function initGame()
 {
+  theme = shuffleArray(themes)[0]
+
+  dog_image1 = new Image();
+  dog_image1.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img1.png"; 
+
+  dog_image2 = new Image();
+  dog_image2.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img2.png"; 
+
+  dog_image3 = new Image();
+  dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img3.png"; 
+
+  images = [dog_image1,dog_image2,dog_image3]
+  images = images.concat(images)
+
   cards = [];
   gameInitialized = false;
   images = shuffleArray(images);
@@ -77,6 +105,14 @@ function zColor(data) {
   return `rgba(0, ${255 * z}, ${255 * (1 - z)}, 1)`;
 }
 
+function changeHand(){
+  if (lmuse == 19){
+    lmuse = 20;
+  }else{
+    lmuse = 19;
+  }
+}
+
 function onCardCursor(cardPos, cursorPos){
   //console.log(cardPos)
   //console.log(cursorPos)
@@ -97,6 +133,7 @@ function verifyIsEqualsCard(selectedCards){
 function drawImageCard(image,context, x,y)
 {
   context.drawImage(image, x, y, CARD_WIDTH, CARD_HEIGHT);
+  console.log(image.src);
 }
 
 function validateEndedGame(toValidationCards){
@@ -125,11 +162,6 @@ function onResultsPose(results) {
     drawImageCard( cards[i].image,canvasCtx5,cards[i].x,cards[i].y);  
   }  
   //console.log(cards)
- var lmuse = 19;
-  if (results.poseLandmarks[20].x*out5.width <= out5.width && results.poseLandmarks[20].y*out5.height <= out5.height)
-  {
-     lmuse = 20;
-  };
 
   drawLandmarks(
       canvasCtx5,
