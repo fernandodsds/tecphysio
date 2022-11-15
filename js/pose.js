@@ -135,7 +135,7 @@ function onResultsPose(results) {
   cursorPos.x = results.poseLandmarks[lmuse].x*out5.width;
   cursorPos.y = results.poseLandmarks[lmuse].y*out5.height;
 
-  canvasCtx5.drawImage(cursor, cursorPos.x-50, cursorPos.y-50, 100, 100);
+  canvasCtx5.drawImage(cursor, cursorPos.x-100, cursorPos.y-100, 100, 100);
 
   if (TotalElapsedTime <=5){
     //verifyIsEqualsCard(selectedCards)
