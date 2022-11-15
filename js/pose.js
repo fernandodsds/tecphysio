@@ -3,8 +3,8 @@ const out5 = document.getElementsByClassName('output5')[0];
 const controlsElement5 = document.getElementsByClassName('control5')[0];
 const canvasCtx5 = out5.getContext('2d');
 const fpsControl = new FPS();
-const CARD_WIDTH = 288
-const CARD_HEIGHT = 360
+const CARD_WIDTH = 230
+const CARD_HEIGHT = 320
 const DEFAULT_IMAGE = "default.png"
 
 function shuffleArray(array) {
@@ -20,7 +20,7 @@ var themes = [
   ,'brasil'
   ,'carros'
   ,'catdog'
-  ,'default'
+ ///,'default'
   ,'frutas'
   ,'jardim'
   ,'mar'
@@ -45,6 +45,8 @@ dog_image2.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+
 var dog_image3 = new Image();
 dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img3.png"; 
 
+var dog_image4 = new Image();
+dog_image4.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img4.png"; 
 
 console.log(images)
 var curPerc = 0
@@ -60,7 +62,7 @@ var gameScore = 0
 var qtdeJogos = 0
 var lmuse = 19;
 
-images = [dog_image1,dog_image2,dog_image3]
+images = [dog_image1,dog_image2,dog_image3, dog_image4]
 images = images.concat(images)
 
 
@@ -78,7 +80,10 @@ function initGame()
   dog_image3 = new Image();
   dog_image3.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img3.png"; 
 
-  images = [dog_image1,dog_image2,dog_image3]
+  dog_image4 = new Image();
+  dog_image4.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img4.png";
+
+  images = [dog_image1,dog_image2,dog_image3, dog_image4]
   images = images.concat(images)
 
   cards = [];
@@ -95,6 +100,15 @@ function initGame()
   for (var i = 3; i<6;i++){
     cards.push({"x": 37 *(i - 2) + (CARD_WIDTH*(i-3)), "y":CARD_HEIGHT+40, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
   }
+
+  //for (var i = 6; i<8;i++){
+  //  cards.push({"x": 37 *(i - 5) + (CARD_WIDTH*(i-6)), "y":(CARD_HEIGHT*2)+80, "image":images[i], 'revealed_image_id':images[i],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+  //}
+
+  cards.push({"x": 37, "y":(CARD_HEIGHT*2)+80, "image":images[6], 'revealed_image_id':images[6],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+  cards.push({"x": 37 * 3 + (CARD_WIDTH* 2), "y":(CARD_HEIGHT*2)+80, "image":images[7], 'revealed_image_id':images[7],"pressed":false, "revealed":false, "startTime":new Date(), "elapsed":0 });
+
+
   return cards
 }
 
@@ -158,7 +172,7 @@ function onResultsPose(results) {
   canvasCtx5.restore();    
   canvasCtx5.stroke();
 
-  for (var i = 0; i <6 ;i++){
+  for (var i = 0; i <8 ;i++){
     drawImageCard( cards[i].image,canvasCtx5,cards[i].x,cards[i].y);  
   }  
   //console.log(cards)
@@ -189,7 +203,7 @@ function onResultsPose(results) {
   }
 
 
-  for (var i = 0; i<6;i++){
+  for (var i = 0; i<8;i++){
     if (onCardCursor(cards[i], cursorPos) 
         && cards[i].elapsed <= 3 
         && !cards[i].revealed 
