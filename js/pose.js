@@ -6,6 +6,7 @@ const fpsControl = new FPS();
 const CARD_WIDTH = 230
 const CARD_HEIGHT = 320
 const DEFAULT_IMAGE = "default.png"
+const JOKER_IMAGE = "joker.png"
 
 function shuffleArray(array) {
   return array.sort( ()=>Math.random()-0.5 );
@@ -35,6 +36,10 @@ var theme = shuffleArray(themes)[0]
 
 var base_image = new Image();
 base_image.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/" +DEFAULT_IMAGE; 
+
+var joker_image = new Image();
+joker_image.src = "https://fernandodsds.github.io/tecphysio/assets/images/" +JOKER_IMAGE; 
+
 
 var dog_image1 = new Image();
 dog_image1.src = "https://fernandodsds.github.io/tecphysio/assets/game_images/"+theme+"/img1.png"; 
@@ -175,6 +180,9 @@ function onResultsPose(results) {
   for (var i = 0; i <8 ;i++){
     drawImageCard( cards[i].image,canvasCtx5,cards[i].x,cards[i].y);  
   }  
+
+  drawImageCard(joker_image,canvasCtx5, 37 * 2 + (CARD_WIDTH* 1),(CARD_HEIGHT*2)+80)
+
   //console.log(cards)
 
   drawLandmarks(
@@ -253,6 +261,8 @@ function onResultsPose(results) {
       selectedCards = []
     }
   }
+
+  document.getElementById("tempoJogo").innerHTML = ""+parseInt((new Date() - startTime)/1000);
 }
 
 const pose = new Pose({locateFile: (file) => {
