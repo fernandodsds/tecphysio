@@ -163,7 +163,7 @@ function validateEndedGame(toValidationCards){
 cards = initGame()
 
 function onResultsPose(results) {
-  TotalElapsedTime=parseInt((new Date() - startTime)/1000);
+  TotalElapsedTime=parseInt((new Date() - startTime)/1000)-6;
 
   document.body.classList.add('loaded');
   fpsControl.tick();
