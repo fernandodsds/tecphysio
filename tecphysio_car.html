@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Template</title>
+        <meta charset="UTF-8">
+        <style>
+            @font-face {
+            font-family: 'Geo';
+            src: url('https://fonts.cdnfonts.com/css/geo')
+            }
+            @font-face {
+            font-family: 'Roboto';
+            src: url('https://fonts.cdnfonts.com/css/roboto')
+            }
+
+            @font-face {
+            font-family: 'Outfit';
+            src: url('https://fonts.cdnfonts.com/css/outfit')
+            }
+
+
+
+            html,body{
+            background-color: #cedde2;
+
+            }
+
+            *, html {
+            margin:0 !important;;
+            padding:0 !important; 
+            }
+
+
+            .father {
+            height: 100vh;
+            display: flex;
+            }   
+
+            .item-hud {
+            margin: 5px;
+            background: #6D0094;
+            text-align: center;
+            font-size: 1.5em;
+            width: 15%;
+            display: flex;
+            flex-direction: column;
+            }
+            .cam{
+            height: 24%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+
+            .score{
+            height: 35%;
+            width: 100%;
+            font-family: 'Outfit';
+            font-weight: bold;
+            font-size: 1em;
+            color: white;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            } 
+
+            .score-panel{
+            height: 15%;
+            width: 70%;
+            border-radius: 1em;
+            text-align: center;
+            font-family: 'Outfit';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #56CCF2;
+            }  
+
+            .status-information{
+            height: 30%;
+            width: 100%;
+            font-family: 'Roboto';
+            color: white;
+            font-size: 0.7em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+            } 
+
+            .status-information img{
+                width: 35%;
+                margin: 0.1em !important;
+            }
+
+            .input_video{
+            height: 100%;
+            } 
+
+            .game{
+            height: 100%;
+            z-index: 3;
+            } 
+
+
+            .item-panel {
+            margin: 5px;
+            width: 100%;
+            background-color: #ffff;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            text-align: center;
+            font-size: 1.5em;
+            }
+
+        </style>
+        <script>
+                function get_camera(video5, callback){
+                        function onResultsPose(results) {
+                            callback(results)
+                        }
+
+                        const pose = new Pose({locateFile: (file) => {
+                        return `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/${file}`;
+                        }});
+                        pose.onResults(onResultsPose);
+
+                        const camera = new Camera(video5, {
+                        onFrame: async () => {
+                            await pose.send({image: video5});
+                        },
+                        width: 480,
+                        height: 480
+                        });
+
+                        return camera
+                }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="father">
+            <div class="item-hud"> 
+    
+                <div class="cam">
+                    <video class="input_video"></video>
+                </div> 
+    
+                <div class="score" > 
+                    <h3>PONTUAÇÃO:</h3> 
+                    <div class="score-panel" id="score"> 0 </div>
+                    <br>
+                    <h3>PARTIDAS:</h3> 
+                    <div class="score-panel" id="qtdeJogos"> 0 </div>
+                    <br>
+                    <h3>TEMPO:</h3> 
+                    <div class="score-panel" id="tempoJogo"> 0 </div>
+                </div>
+    
+                <div class="status-information"> 
+                    <img  src="./assets/images/refresh.png" alt="" onclick="initGame();">
+                    <p>PRESSIONE PARA REINICIAR</p>
+                </div>
+    
+                <div class="status-information"> 
+                    <img  src="./assets/images/handButton.png" alt="" onclick="changeHand();">
+                    <p>PRESSIONE PARA TROCAR DE MÃO</p>
+                </div>
+    
+            </div>
+            <div class="item-panel">
+                <canvas id="canvas"  class="output5" width="100" width="1080px" height="1080px"></canvas>
+                <script src="tecphysio_car.js"></script>
+                <script>
+                    var engine = new Engine({"args":[],"canvasResizePolicy":1,"executable":"tecphysio_car","experimentalVK":false,"fileSizes":{"tecphysio_car.pck":65792,"tecphysio_car.wasm":17867504},"focusCanvas":true,"gdnativeLibs":[]});
+                    engine.startGame();
+                </script>
+            </div>
+        </div>
+        <div style="visibility: hidden;" class="control5">
+        </div>
+
+
+    </body>
+</html>
